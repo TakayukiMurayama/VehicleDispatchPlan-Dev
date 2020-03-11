@@ -1,0 +1,99 @@
+﻿@model VehicleDispatchPlan.Models.T_Forecast
+
+@{
+    ViewBag.Title = "受入予測管理";
+}
+
+<h2>受入予測</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-inline">
+            <font size="4">対象期間</font>
+                <div class="form-group" style="margin-left:30px;">
+                    @Html.DropDownListFor(model => model.Year, (IEnumerable<SelectListItem>)ViewBag.SelectYear, "選択してください", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group" style="margin-left:30px;">
+                    @* 上期 *@
+                    @Html.Label((string)ViewBag.LabelFirstHalf)
+                    @Html.RadioButtonFor(model => model.Period, (string)ViewBag.FirstHalf, new { htmlAttributes = new { @class = "form-control" } })
+                    @* 下期 *@
+                    @Html.Label((string)ViewBag.LabelSecondHalf)
+                    @Html.RadioButtonFor(model => model.Period, (string)ViewBag.SecondHalf, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                @* 検索ボタン *@
+                <div class="form-group" style="margin-left:30px;">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" name="search" value="検索" class="btn btn-default" />
+                    </div>
+                </div>
+</div>
+
+        <hr />
+
+        <font size="4">
+            @Html.Label((string)ViewBag.LabelTargetPeriod, htmlAttributes: new { @style = "" })
+        </font>
+
+        @* 指導員数 *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.InstructorAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InstructorAmt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InstructorAmt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* 学科時限数 *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClassQty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ClassQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClassQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* 合宿比率 *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.LodgingRatio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LodgingRatio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LodgingRatio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* 教習外業務比率 *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.NotDrivingRatio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NotDrivingRatio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NotDrivingRatio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* 更新ボタン *@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" name="update" value="更新" class="btn btn-default" />
+            </div>
+        </div>
+
+        @* グラフ *@
+        <div class="row">
+            <p style="overflow: auto;">
+                <img src="@Url.Action("Chart", new { year = Model.Year, period = Model.Period })" />
+            </p>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
