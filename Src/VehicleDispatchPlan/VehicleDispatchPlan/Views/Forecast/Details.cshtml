@@ -1,0 +1,46 @@
+﻿@model VehicleDispatchPlan.Models.T_Forecast
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Forecast</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InstructorAmt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InstructorAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassQty)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClassQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LodgingRatio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LodgingRatio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotDrivingRatio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NotDrivingRatio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

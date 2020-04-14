@@ -1,0 +1,67 @@
+﻿@model IEnumerable<VehicleDispatchPlan.Models.Q_Trainee>
+@{
+    ViewBag.Title = "教習生管理";
+}
+
+<h2>教習生管理</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        入校予定日: @Html.TextBox("PlanDateFrom", String.Format("{0:d}", ""), new { @class = "datefield", type = "date" })
+        ～ @Html.TextBox("PlanDateTo", String.Format("{0:d}", ""), new { @class = "datefield", type = "date" })
+        <input type="submit" value="検索" />
+    </p>
+}
+
+<p>
+    @Html.ActionLink("新規登録", "Regist")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TraineeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TraineeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttendTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrainingCourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntrancePlanDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraineeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraineeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttendTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingCourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntrancePlanDate)
+            </td>
+            <td>
+                @Html.ActionLink("編集", "Edit", new { id = item.TraineeId }) |
+                @Html.ActionLink("詳細", "Details", new { id = item.TraineeId }) |
+                @Html.ActionLink("削除", "Delete", new { id = item.TraineeId })
+            </td>
+        </tr>
+    }
+
+</table>
